@@ -2,6 +2,7 @@ package org.example;
 
 // Fig. 17.12: ArraysAndStreams2.java
 // Demonstrating lambdas and streams with an array of Strings.
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -32,9 +33,23 @@ public class ArraysAndStreams2 {
                .filter(s -> s.compareToIgnoreCase("n") < 0)
                .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                .collect(Collectors.toList()));
-   }
-} 
 
+
+      System.out.printf("Strings starts with a vowel: %s%n",
+              Arrays.stream(strings)
+                      .filter(s -> s.matches("(?i)^[aeiou].*"))
+                      .collect(Collectors.toList()));
+
+      String concatenated = Arrays.stream(strings)
+              .collect(Collectors.joining(", "));
+      System.out.printf("Concatenated string: %s%n", concatenated);
+
+      long count = Arrays.stream(strings)
+              .filter(s -> s.length() > 5)
+              .count();
+      System.out.printf("Strings with more than 5 characters: %d%n", count);
+   }
+}
 
 /**************************************************************************
  * (C) Copyright 1992-2018 by Deitel & Associates, Inc. and               *
